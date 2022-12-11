@@ -16,8 +16,17 @@ InputDecoration customTextField(String labelText) {
 
 InputDecoration customTextFieldChat(String text) {
   return InputDecoration(
-    prefix: Text(text),
-  );
+      hintText: text,
+      hintStyle: TextStyle(color: Colors.white),
+      labelStyle: TextStyle(
+        color: Colors.white,
+      ),
+      enabledBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.white),
+      ),
+      focusedBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.white),
+      ));
 }
 
 TextStyle buttonText() {
@@ -35,7 +44,7 @@ TextStyle customText() {
 TextStyle customTextTile() {
   return TextStyle(
     color: Colors.white,
-    fontSize: 18,
+    fontSize: 16,
   );
 }
 

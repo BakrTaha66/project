@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:full_project/database_local.dart';
 import 'package:full_project/helper/authenticate.dart';
 import 'package:full_project/screens/signin_screen.dart';
+import 'package:full_project/services/user_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await UserPreferences.init();
   runApp(MyApp());
 }
 

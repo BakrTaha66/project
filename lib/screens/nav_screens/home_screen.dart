@@ -64,7 +64,7 @@ Widget homeData(dynamic data) {
             },
             child: Container(
               decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.1),
+                  color: Color(0xff0b021c).withOpacity(0.40),
                   borderRadius: BorderRadius.circular(10)),
               child: ListTile(
                 leading: ClipOval(

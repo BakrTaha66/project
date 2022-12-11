@@ -7,6 +7,8 @@ import 'package:full_project/services/auth.dart';
 import 'package:full_project/services/database.dart';
 import 'package:full_project/widgets/widget.dart';
 
+import 'main_screen.dart';
+
 class SignInScreen extends StatefulWidget {
   final Function toggle;
   SignInScreen(this.toggle);
@@ -139,7 +141,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomeScreen()));
+                                  builder: (context) => MainScreen()));
                         });
                       }
                     },
