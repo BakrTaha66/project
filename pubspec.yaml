@@ -47,7 +47,8 @@ dependencies:
   path_provider: ^2.0.1
   firebase_storage: ^11.0.6
   sqflite:
-  path: 
+  path:
+  google_maps_flutter:
 
 
 dependency_overrides:

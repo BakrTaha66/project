@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:full_project/database_local.dart';
 import 'package:full_project/helper/authenticate.dart';
+import 'package:full_project/screens/home_home.dart';
 import 'package:full_project/screens/signin_screen.dart';
 import 'package:full_project/services/user_preferences.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
           primaryColor: Colors.green, scaffoldBackgroundColor: Colors.white),
-      home: Authenticate(),
+      home: HomeHome(),
     );
   }
 }

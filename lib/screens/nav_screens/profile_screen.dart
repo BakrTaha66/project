@@ -1,9 +1,14 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
+
+import '../../services/auth.dart';
+import '../../services/database.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -11,6 +16,16 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final User? user = Auth().currentUser;
+
+  Future<void> signOut() async {
+    await Auth().signOut();
+  }
+
+  final databaseMethods = DatabaseMethods();
+  final fireStore = FirebaseFirestore.instance;
+  final String collectionName = 'users';
+
   File? _image;
   final _picker = ImagePicker();
   var imgValue;
@@ -21,16 +36,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     setState(() {
       _image = image;
+      uploadImage();
     });
   }
 
-  Future uploadImageToFirebase() async {
+  Future uploadImage() async {
     String fileName = basename(_image!.path);
     FirebaseStorage firebaseStorage = FirebaseStorage.instance;
-    Reference ref = firebaseStorage
+    Reference reference = firebaseStorage
         .ref()
-        .child('upload/$fileName' + DateTime.now().toString());
-    UploadTask uploadTask = ref.putFile(_image!);
+        .child('image/$fileName' + DateTime.now().toString());
+    UploadTask uploadTask = reference.putFile(_image!);
 
     uploadTask.then((res) {
       res.ref.getDownloadURL().then((value) => imgValue = value);
@@ -51,29 +67,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   _showPicker(context);
                 },
                 child: CircleAvatar(
-                    radius: 55,
-                    backgroundColor: Colors.white,
-                    child: _image != null
-                        ? ClipOval(
-                            child: Image.file(
-                              _image!,
-                              width: 200,
-                              height: 200,
-                              fit: BoxFit.fitHeight,
-                            ),
-                          )
-                        // ? Text('error')
-                        : Container(
-                            decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(50)),
+                  child: _image == null
+                      ? null
+                      : ClipOval(
+                          child: Image.file(
+                            _image!,
                             width: 200,
                             height: 200,
-                            child: Icon(
-                              Icons.camera_alt,
-                              color: Colors.grey[800],
-                            ),
-                          )),
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
+                ),
               ),
             ],
           ),

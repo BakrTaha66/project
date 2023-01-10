@@ -21,10 +21,15 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // tilt
+    // bearing
+    // latitude
+    // longitude
+
     return Scaffold(
       body: _widgetsList[selectIndex],
       bottomNavigationBar: ConvexAppBar(
-        items: [
+        items: const [
           TabItem(
               icon: Icon(
                 Icons.home,
